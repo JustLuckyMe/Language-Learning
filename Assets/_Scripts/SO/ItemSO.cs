@@ -5,5 +5,7 @@ public class ItemSO : ScriptableObject
 {
     public string itemName;
     public Sprite itemImage;
-    public AudioClip AudioClip;
+    public AudioClip itemAudio;
+    public string itemTranslation;
+    public AudioClip itemTranslatedAudio;
 }
