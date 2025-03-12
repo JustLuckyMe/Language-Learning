@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: addcf86ba843daf4a83335bc2eb9b108, type: 3}
-  m_Name: New Item
+  m_Name: Option1
   m_EditorClassIdentifier: 
-  itemName: 
-  itemImage: {fileID: 0}
+  itemName: Item1
+  itemImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  itemAudio: {fileID: 8300000, guid: d8bebee79fb69594cab056d02edea4b3, type: 3}
+  itemTranslation: Item11
+  itemTranslatedAudio: {fileID: 8300000, guid: d8bebee79fb69594cab056d02edea4b3, type: 3}

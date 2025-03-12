@@ -60,7 +60,7 @@ public class WordTeacherManager : MonoBehaviour
         ItemSO currentWord = ListOfWords[currentIndex];
 
         // Play the word's audio
-        audioSource.clip = currentWord.AudioClip;
+        audioSource.clip = currentWord.itemAudio;
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length + 0.5f);
 
