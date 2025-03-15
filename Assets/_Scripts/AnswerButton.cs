@@ -42,7 +42,4 @@ public class AnswerButton : MonoBehaviour
         itemImage.sprite = assignedItem.itemImage;
         GetComponent<Button>().onClick.AddListener(() => dialogueManager.CheckAnswer(assignedItem));
     }
-
-
-
 }

@@ -8,10 +8,11 @@ public class DialogueManager : MonoBehaviour
     public List<QuestionWrapper> questions = new List<QuestionWrapper>();
     public Transform[] typeASpawnPoints;
     public Transform[] typeBSpawnPoints;
-    public GameObject answerButtonPrefab; // A UI Button prefab to use for answers
-    public Transform answerParent; // Parent object in UI to hold buttons
+    public GameObject answerButtonPrefab;
+    public Transform answerParent;
 
     private QuestionWrapper currentQuestion;
+    [SerializeField] DataTracker tracker;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class DialogueManager : MonoBehaviour
 
     public void SpawnAnswers(int questionIndex)
     {
-        currentQuestion = questions[questionIndex]; // Store the current question
+        currentQuestion = questions[questionIndex];
 
         // Clear old buttons
         foreach (Transform child in answerParent)
@@ -34,36 +35,46 @@ public class DialogueManager : MonoBehaviour
 
             GameObject buttonObject = Instantiate(answerButtonPrefab, spawnPoint.position, Quaternion.identity, answerParent);
 
-            if (buttonObject == null)
+            AnswerButton answerButton = buttonObject.GetComponent<AnswerButton>();
+            if (answerButton != null)
             {
-                Debug.LogError("Instantiated buttonObject is null!");
-                return;
+                answerButton.Setup(currentQuestion.questionChoices[i], currentQuestion.correctAnswer, this);
             }
-
-            
-            if (!buttonObject.TryGetComponent<AnswerButton>(out var answerButton))
+            else
             {
-                Debug.LogError("AnswerButton component is missing on the instantiated buttonObject!", buttonObject);
-                return;
+                Debug.LogError("SpawnAnswers Error: AnswerButton component is missing on the instantiated prefab!", buttonObject);
             }
-
-            answerButton.Setup(currentQuestion.questionChoices[i], currentQuestion.correctAnswer, this);
         }
     }
+
 
     public void CheckAnswer(ItemSO selectedItem)
     {
         if (selectedItem == currentQuestion.correctAnswer)
         {
-            Debug.Log("Correct Answer!");
-            // Add logic to proceed to the next question or give positive feedback
+            CorrectAnswer();
         }
         else
         {
-            Debug.Log("Wrong Answer!");
-            // Handle incorrect answers if needed
+            WrongAnswer();
         }
     }
+
+    #region Animation
+
+    private void WrongAnswer()
+    {
+        Debug.Log("Wrong Answer!");
+
+    }
+
+    private void CorrectAnswer()
+    {
+        Debug.Log("Correct Answer!");
+
+    }
+
+    #endregion
 }
 
 [System.Serializable]
