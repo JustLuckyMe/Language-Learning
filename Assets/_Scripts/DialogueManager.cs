@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     private QuestionWrapper currentQuestion;
     [SerializeField] DataTracker tracker;
+    [SerializeField] AnswerAnimation answerAnimation;
 
     private void Start()
     {
@@ -65,13 +66,14 @@ public class DialogueManager : MonoBehaviour
     private void WrongAnswer()
     {
         Debug.Log("Wrong Answer!");
+        answerAnimation.WrongAnimation();
 
     }
 
     private void CorrectAnswer()
     {
         Debug.Log("Correct Answer!");
-
+        answerAnimation.CorrectAnimation();
     }
 
     #endregion
